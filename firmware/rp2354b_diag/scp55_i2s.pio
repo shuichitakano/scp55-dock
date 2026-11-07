@@ -1,0 +1,18 @@
+; Based on Raspberry Pi pico-extras audio_i2s.pio (BSD-3-Clause).
+; Stereo 16-bit, 32-bit FIFO word: left[31:16], right[15:0].
+; LRCLK low selects left; changes one bit before the next channel MSB.
+; sideset bit 0 = BCLK, bit 1 = LRCLK; OUT pin = DAC DIN.
+.program scp55_i2s
+.side_set 2
+
+left_bits:
+    out pins, 1       side 0b00
+    jmp x-- left_bits side 0b01
+    out pins, 1       side 0b10
+    set x, 14         side 0b11
+right_bits:
+    out pins, 1       side 0b10
+    jmp x-- right_bits side 0b11
+    out pins, 1       side 0b00
+public entry_point:
+    set x, 14         side 0b01
