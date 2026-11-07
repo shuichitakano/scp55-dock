@@ -1,0 +1,17 @@
+{
+  "date": "2026-11-08",
+  "pages": 12,
+  "components": 187,
+  "component_values_and_footprints_match": true,
+  "connected_pins": 682,
+  "pin_connectivity_changes": 0,
+  "net_groups": 175,
+  "erc_errors": 0,
+  "erc_warnings": {
+    "footprint_link_issues": 6,
+    "lib_symbol_issues": 24,
+    "endpoint_off_grid": 715
+  },
+  "comparison": "Pin-to-pin connectivity, including singleton nets, compared against the production Rev.A source. Virtual power symbols excluded; all physical component references included.",
+  "pdf_sha256": "0992926745dffa261d94d63cee56c439bcaad63a4f08fc61789f98071e476883"
+}

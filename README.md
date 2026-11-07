@@ -44,8 +44,10 @@ without measurement-error compensation. Measure the reference voltage and
 rebuild for another board. This adapter is specifically designed for the SCP-55.
 Verify the pin mapping of the salvaged J1 connector when assembling a board.
 
-The schematic and Gerbers are dated 2026-09-30; the playback UF2 was built on
-2026-10-19. This repository does not include editable KiCad files, enclosure
+The electrical design and Gerbers are dated 2026-09-30. The schematic PDF was
+reorganized into 12 functional sheets on 2026-11-08, with no pin connectivity,
+component value or footprint changes. See the [verification report](docs/schematic-verification.json).
+The playback UF2 was built on 2026-10-19. This repository does not include editable KiCad files, enclosure
 files, development logs or SCP-55 ROM data.
 
 This is an independent project, unaffiliated with Roland.
