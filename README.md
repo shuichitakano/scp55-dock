@@ -52,7 +52,9 @@ This is an independent project, unaffiliated with Roland.
 
 ## License
 
-A reuse license for the original project material has not yet been selected.
-Third-party copyright and license notices are retained in their source files.
-The Raspberry Pi-derived BOOTSEL implementation is subject to the
-[BSD-3-Clause terms](licenses/pico-sdk-BSD-3-Clause.txt).
+- **Schematic and manufacturing Gerbers/drills:** [CERN-OHL-P-2.0](licenses/CERN-OHL-P-2.0.txt).
+- **Original firmware, software and documentation:** [MIT](licenses/MIT.txt).
+
+Both allow commercial use, modification and redistribution subject to their
+terms. Third-party components retain their existing licenses.
+See [licensing details and third-party notices](LICENSE.md).
