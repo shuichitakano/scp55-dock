@@ -1,45 +1,58 @@
 # SCP-55 Dock
 
-Roland SCP-55 PC Card音源をPC Cardスロットなしで使用するための専用アダプターです。
-USB-MIDIまたはDIN MIDIを受信し、基板のLINE OUTから音声を出力します。
-RP2354Bを使用。Rev.A基板は73 × 115 mm、4層、設計板厚1.6 mmです。
+A standalone adapter for the Roland SCP-55 PC Card sound module. It receives
+USB MIDI and DIN MIDI and plays audio through the board's LINE OUT, without a
+PC Card slot. The board uses an RP2354B microcontroller.
 
-## 公開ファイル
+Rev.A: 73 × 115 mm, four layers, 1.6 mm design thickness.
 
-- [回路図PDF](output/pdf/scp55-reva.pdf)
-- [製造用ガーバーZIP（PTH/NPTHドリル入り）](output/manufacturing/scp55-reva-73x115-gerbers.zip)
-- [演奏用ファームウェアUF2](output/firmware/usb-midi-bench/scp55-usb-midi-bench.uf2)
-- [初回確認用・受動診断UF2](output/firmware/passive/scp55-passive.uf2)
-- [ファームウェアのソース・ビルド手順](firmware/README.md)
-- [ファイルのSHA-256](SHA256SUMS)
+## Downloads
 
-## 書き込み・使い方
+- [Schematic PDF](output/pdf/scp55-reva.pdf)
+- [Manufacturing Gerbers, including PTH/NPTH drill files](output/manufacturing/scp55-reva-73x115-gerbers.zip)
+- [Playback firmware (UF2)](output/firmware/usb-midi-bench/scp55-usb-midi-bench.uf2)
+- [Passive diagnostic firmware (UF2)](output/firmware/passive/scp55-passive.uf2)
+- [Firmware source and build instructions](firmware/README.md)
+- [SHA-256 checksums](SHA256SUMS)
 
-1. USBを外す。初回の基板確認ではSCP-55も外す。
-2. 基板のBOOTボタンを押しながらUSB接続し、表示されたBOOTSELドライブへUF2をコピーする。
-3. 初回は受動診断版で基板電圧・カード検出を確認する。受動診断版では演奏できない。
-4. USBを外してSCP-55を挿入し、演奏用UF2を書き込む。給電時にカードを自動起動する。
-5. USBの出力先「SCP-55 USB MIDI」または基板のDIN MIDI INへMIDIを送信する。
-   LINE OUTをアンプ／スピーカーへ接続し、音量は接続先で調整する。
+## Flashing and use
 
-USBとDINは常時待受で、入力切り替えは不要。音声は44.1 kHz / 16-bitステレオです。
-BOOTを約2秒長押しするとカード電源OFF、離して短く押すとONになります。
-これはカード電源の操作で、マイコン・USB・DACには引き続き給電されます。
+1. Disconnect USB. For initial board checks, also remove the SCP-55 card.
+2. Hold the board's BOOT button while connecting USB. Release it when the
+   BOOTSEL drive appears, then copy the UF2 file to that drive.
+3. On a newly assembled board, start with the passive diagnostic firmware and
+   check board voltages and card detection. This firmware does not play audio.
+4. With USB disconnected, insert the SCP-55. Flash the playback firmware using
+   the same BOOTSEL procedure. The card starts automatically on power-up.
+5. Send MIDI to **SCP-55 USB MIDI** over USB, or to the board's DIN MIDI IN.
+   Connect LINE OUT to an amplifier or powered speakers and adjust volume there.
 
-## 確認済みの範囲
+USB and DIN inputs are always active; no manual input selection is needed.
+Audio capture and output use 44.1 kHz, 16-bit stereo.
+Hold BOOT for about two seconds to turn card power off. Release it, then press
+briefly to turn card power back on. The microcontroller, USB interface and DAC
+remain powered while the card is off.
 
-実機でUSB/DIN経由の演奏、ステレオ出力、BOOTによるカード電源操作を確認済み。
-2台目でもUSB演奏・左右分離を確認しています。全体音量のUIはありません。
-付属UF2はADC基準3320 mV・誤差補償なしの実機試験設定です。
-別個体では電圧を実測してソースからビルドしてください。
-SCP-55専用設計です。製造時は回収品J1コネクターのピン対応を確認してください。
+## Tested configuration and limitations
 
-回路図とガーバーは2026-09-30版、演奏用UF2は2026-10-19ビルドです。
-KiCad編集データ、筐体、開発ログ、SCP-55のROMデータは含みません。
-Roland公式製品・公式ファームウェアではありません。
+USB and DIN playback, stereo output and BOOT card-power control have been tested
+on hardware. A second board also passed USB playback and left/right separation
+checks. There is no master-volume UI.
 
-## ライセンス
+The supplied playback UF2 uses a 3320 mV ADC reference and a bench configuration
+without measurement-error compensation. Measure the reference voltage and
+rebuild for another board. This adapter is specifically designed for the SCP-55.
+Verify the pin mapping of the salvaged J1 connector when assembling a board.
 
-本プロジェクト独自部分の再利用ライセンスは未設定です。
-第三者由来コードの著作権・ライセンス表記は各ソース内に保持しています。
-Raspberry Pi由来のBOOTSEL処理等のBSD条件は[こちら](licenses/pico-sdk-BSD-3-Clause.txt)を参照してください。
+The schematic and Gerbers are dated 2026-09-30; the playback UF2 was built on
+2026-10-19. This repository does not include editable KiCad files, enclosure
+files, development logs or SCP-55 ROM data.
+
+This is an independent project, unaffiliated with Roland.
+
+## License
+
+A reuse license for the original project material has not yet been selected.
+Third-party copyright and license notices are retained in their source files.
+The Raspberry Pi-derived BOOTSEL implementation is subject to the
+[BSD-3-Clause terms](licenses/pico-sdk-BSD-3-Clause.txt).

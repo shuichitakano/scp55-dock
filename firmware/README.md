@@ -1,31 +1,33 @@
-# ファームウェア
+# Firmware
 
-RP2354B用。演奏版はUSB/DIN MIDI同時待受、44.1 kHz / 16-bitステレオ、unity gain、BOOT電源操作に対応。
-ソースは `rp2354b_diag/` とこのディレクトリのCファイルです。
+Firmware for the RP2354B-based SCP-55 Dock. The playback build supports USB and
+DIN MIDI simultaneously, 44.1 kHz / 16-bit stereo audio, unity gain and BOOT
+card-power control. Sources are in `rp2354b_diag/` and the C files in this directory.
 
-## ビルド
+## Build
 
-使用実績: Pico SDK 2.3.0、Arm GNUツールチェーン、CMake、picotool 2.x。
-Pico SDKは必要なサブモジュール（TinyUSB等）を取得して別途用意します。
-リポジトリルートで実行してください。
+Tested with Pico SDK 2.3.0, the Arm GNU toolchain, CMake and picotool 2.x.
+Prepare the Pico SDK separately, including its required submodules such as
+TinyUSB. Run the following commands from the repository root:
 
 ```sh
 export PICO_SDK_PATH=/path/to/pico-sdk
 export PICOTOOL=/path/to/picotool
 sh firmware/build-rp2354b.sh passive
-# 実測したADC基準電圧(mV)を設定。3320は配布UF2の実機試験値。
+# Set your measured ADC reference in mV; 3320 is the supplied UF2's bench value.
 SCP55_ADC_REFERENCE_MV=3320 sh firmware/build-rp2354b.sh usb-midi-bench
 ```
 
-成果物は `output/firmware/<profile>/` に生成されます。
-`usb-midi-bench` は誤差補償を省いた試験プロファイルです。
-ADC基準電圧を未設定にするとカード給電は許可されません。
+Build artifacts are written to `output/firmware/<profile>/`.
+The `usb-midi-bench` profile omits measurement-error compensation.
+Card power is not enabled if the ADC reference is left unset.
 
-## 検証
+## Tests
 
 ```sh
 sh firmware/run-host-tests.sh
 ```
 
-ホスト上で電源状態、カード識別、バス、MIDIマージ、音声処理、ボタン、GPIO対応を検査します。
-実機の動作確認とは別です。
+The host suite checks power states, card identification, bus transactions, MIDI
+merging, audio processing, button behavior and GPIO assignments. These tests
+are separate from hardware validation.
