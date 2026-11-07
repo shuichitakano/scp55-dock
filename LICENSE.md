@@ -4,8 +4,8 @@ Copyright (c) 2026 Shuichi Takano, for original project material.
 
 ## Hardware design deliverables
 
-The schematic PDF and manufacturing Gerber/drill archive under `output/pdf/`
-and `output/manufacturing/` are licensed under the
+The schematic PDF under `output/pdf/` and hardware manufacturing data under
+`output/manufacturing/` (Gerbers, drills, BOMs and placement tables) are licensed under the
 [CERN Open Hardware Licence Version 2 – Permissive (CERN-OHL-P-2.0)](licenses/CERN-OHL-P-2.0.txt).
 
 You may redistribute and modify this Covered Source and make products using it

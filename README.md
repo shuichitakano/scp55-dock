@@ -10,6 +10,7 @@ Rev.A: 73 × 115 mm, four layers, 1.6 mm design thickness.
 
 - [Schematic PDF](output/pdf/scp55-reva.pdf)
 - [Manufacturing Gerbers, including PTH/NPTH drill files](output/manufacturing/scp55-reva-73x115-gerbers.zip)
+- [Assembly BOM, CPL and procurement notes](output/manufacturing/assembly/README.md)
 - [Playback firmware (UF2)](output/firmware/usb-midi-bench/scp55-usb-midi-bench.uf2)
 - [Passive diagnostic firmware (UF2)](output/firmware/passive/scp55-passive.uf2)
 - [Firmware source and build instructions](firmware/README.md)
